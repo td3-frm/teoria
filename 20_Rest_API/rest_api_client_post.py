@@ -1,20 +1,27 @@
 import requests
 
-# URL del servidor (sensor)
-sensor_url = 'http://localhost:5000/sensor/configure'
+# URL del endpoint (ajustá el puerto o dominio según corresponda)
+url = "http://localhost:5000/sensor/configure"
 
-# Datos de configuración a enviar al sensor
-config_data = {
-    'sensor_id': 'sensor_002',
-    'temperature_limit': 25.5
+# Datos de configuración a enviar (JSON)
+payload = {
+    "sensor_id": "SENSOR_5555",
+    "temperature_limit": 75
 }
 
-# Enviamos la petición POST con los datos JSON
-response = requests.post(sensor_url, json=config_data)
+# Encabezados HTTP
+headers = {
+    "Content-Type": "application/json"
+}
 
-# Verificamos si la solicitud fue exitosa (código 200)
-if response.status_code == 201:
-    data = response.json()
-    print(f"Respuesta del servidor: {data}")
-else:
-    print(f"Error al configurar el sensor. Código de estado: {response.status_code}")
+try:
+    # Enviar la solicitud POST
+    response = requests.post(url, json=payload, headers=headers)
+
+    # Mostrar el código de estado y la respuesta del servidor
+    print(f"Status Code: {response.status_code}")
+    print("Response JSON:")
+    print(response.json())
+
+except requests.exceptions.RequestException as e:
+    print(f"Error en la conexión: {e}")

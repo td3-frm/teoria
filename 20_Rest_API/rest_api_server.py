@@ -7,9 +7,9 @@ app = Flask(__name__)
 @app.route('/sensor/temperature', methods=['GET'])
 def get_temperature():
     # Generamos un valor de temperatura aleatorio
-    temperature = round(random.uniform(20.0, 30.0), 2)
+    temperature = round(random.uniform(20.0, 40.0), 2)
     data = {
-        'sensor_id': 'sensor_001',
+        'sensor_id': 'sensor_005',
         'temperature': temperature,
         'unit': 'Celsius'
     }
