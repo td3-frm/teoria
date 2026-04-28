@@ -19,12 +19,17 @@ sem_t sem;
 //---------------- Hilo ---------------------------//
 
 void * HILO(){
-int s;
+
+	int s, sval;
 
 	sleep(10);
 	
 	printf ("Soy el HILO voy a incrementar semaforo\n");
 
+//------lee valor de sem 
+	sem_getvalue(&sem, &sval);
+	printf("Valor de semaforo: %d\n", sval);
+	
 //------ Se incrementa sem 
 	s=sem_post(&sem);
 	if (s != 0) {

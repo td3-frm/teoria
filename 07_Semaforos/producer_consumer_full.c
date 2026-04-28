@@ -32,9 +32,9 @@
 
 /* ── tunables ─────────────────────────────────────────────────────────── */
 #define BUFFER_SIZE     8       /* circular buffer capacity (slots)        */
-#define NUM_PRODUCERS   3       /* threads simulating HTTP workers          */
-#define NUM_CONSUMERS   2       /* threads processing log entries           */
-#define LOGS_PER_PROD   10      /* how many log entries each producer emits */
+#define NUM_PRODUCERS   1       /* threads simulating HTTP workers          */
+#define NUM_CONSUMERS   1       /* threads processing log entries           */
+#define LOGS_PER_PROD   16      /* how many log entries each producer emits */
 
 /* ── log entry ────────────────────────────────────────────────────────── */
 typedef struct {

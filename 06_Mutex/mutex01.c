@@ -1,32 +1,32 @@
-/* Ejercicio 2 del TP mutex 
- acceso a variables compartidas sin uso mutex */
+/* Acceso a variables compartidas con uso mutex */
 
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-
 /* Variables Globales */
 int t, total, vueltas ;
-pthread_mutex_t my_mutex = PTHREAD_MUTEX_INITIALIZER; // inicializacion estatica del mutex
+pthread_mutex_t my_mutex1 = PTHREAD_MUTEX_INITIALIZER; // inicializacion estatica del mutex
 
 
 void * incrementar(void * nro) {
 
-	int local1, j, numero;
-
+	int j, numero;
+	static int local1;
+	
 	numero = *(int*)nro;
 
 	for(j=0; j < vueltas; j++){
-		pthread_mutex_lock(&my_mutex);	
+		//pthread_mutex_lock(&my_mutex);
 		local1 = total;
 		local1++;
-		total=local1;
-		pthread_mutex_unlock(&my_mutex);
+		total = local1;
+		//pthread_mutex_unlock(&my_mutex);
 	}
-
+	
 	printf("Hola soy, el thread %d, total= %d\n", numero, total);
+	
 	pthread_exit(NULL);
 }
 
@@ -37,7 +37,7 @@ int rc ;
 int arre[5];
 
 	total=0;
-	vueltas=100000;
+	vueltas=1000;
 	
 	for(t=0; t < 5 ; t++){
 		printf("El main creando el thread nro %d\n", t);
