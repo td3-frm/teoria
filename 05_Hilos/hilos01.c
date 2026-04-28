@@ -11,7 +11,7 @@
 void * hola(void * nro) {
   
    sleep(3);
-   printf("Hola, soy el hilo %d\n", *((int*) nro) );
+   printf("Hola, soy el hilo %d\n", *( (int*) nro) );
    pthread_exit(NULL);
    //exit(0);
 
@@ -22,11 +22,11 @@ int main() {
     pthread_t pth;
     int rc, t;
 
-    t = 100;
+    t = 1000;
      
     printf("Main creando el hilo nro %d\n", t);
         
-    rc = pthread_create(&pth, NULL, hola , (void *)(&t)  );
+    rc = pthread_create(&pth, NULL, hola , (void *)(&t) );
      
     if (rc != 0){
          printf("ERROR; pthread_create() = %d\n", rc);
@@ -41,5 +41,5 @@ int main() {
 
    pthread_exit(NULL);
    
-   return 0;
+   //return 0;
 }
