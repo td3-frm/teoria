@@ -7,7 +7,7 @@
 
 /* Variables Globales */
 int t, total, vueltas ;
-pthread_mutex_t my_mutex1 = PTHREAD_MUTEX_INITIALIZER; // inicializacion estatica del mutex
+pthread_mutex_t my_mutex = PTHREAD_MUTEX_INITIALIZER; // inicializacion estatica del mutex
 
 
 void * incrementar(void * nro) {
@@ -16,17 +16,18 @@ void * incrementar(void * nro) {
 	static int local1;
 	
 	numero = *(int*)nro;
-
+	
+	pthread_mutex_lock(&my_mutex);
 	for(j=0; j < vueltas; j++){
 		//pthread_mutex_lock(&my_mutex);
 		local1 = total;
 		local1++;
 		total = local1;
-		//pthread_mutex_unlock(&my_mutex);
+		// pthread_mutex_unlock(&my_mutex);
 	}
 	
 	printf("Hola soy, el thread %d, total= %d\n", numero, total);
-	
+	pthread_mutex_unlock(&my_mutex);
 	pthread_exit(NULL);
 }
 

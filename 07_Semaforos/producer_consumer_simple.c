@@ -51,7 +51,7 @@ static void *consumer(void *arg) {
     (void)arg;
 
     for (int i = 0; i < NUM_ITEMS; i++) {
-		//sleep(2);   /* simulate work */
+		sleep(2);   /* simulate work */
 		
         sem_wait(&sem_full);    /* wait for an item       */
         sem_wait(&mutex);
